@@ -6,14 +6,13 @@
     <title>Todo App</title>
     <style>
         body {
-            
             color: blue;
             margin-top: 5px;
         }
 
         .button {
             color: black;
-			background-color: #fff;
+            background-color: #fff;
         }
 
         .mark {
@@ -26,30 +25,30 @@
     <div>
         <h2>Add a new todo item:</h2>
         <form action="{{ url_for('add') }}" method="POST">
-            <input type="text" name="todoitem" placeholder="Enter todo item">
-            <input type="submit" value="Add Item" class="button">
+            <input type="text" name="todoitem" placeholder="Enter todo item" required>
+            <input type="submit" value="Add Item" class="button" >
         </form>
     </div>
     <div>
-		<h2>Incomplete Items</h2>
+        <h2>Incomplete Items</h2>
         <ul>
             {% for todo in incomplete %}
             <li style="font-size: 30pt" class='mark'>{{ todo.text }} 
-				<form action="{{ url_for('complete', id=todo._id) }}" method="GET" style="display: inline;">
-					<input type="submit" value="Mark as complete" class="button"></form>
-    </li>
+                <form action="{{ url_for('complete', id=todo._id) }}" method="GET" style="display: inline;">
+                    <input type="submit" value="Mark as complete" class="button" >
+                </form>
+            </li>
             {% endfor %}
         </ul>
         <h2>Completed Items</h2>
         <ul>
-			<form action="{{ url_for('remove') }}" method="POST" style="display: inline;">
-				<input type="submit" value="Remove All" class="button"></form>
+            <form action="{{ url_for('remove') }}" method="POST" style="display: inline;">
+                <input type="submit" value="Remove All" class="button" onclick="return confirm('Are you sure you have  completed  all this items?')">
+            </form>
             {% for todo in complete %}
-            <li style="font-size: 30pt">{{ todo.text }}
-				</li>
+            <li style="font-size: 30pt">{{ todo.text }}</li>
             {% endfor %}
         </ul>
-        
     </div>
 </body>
 </html>
