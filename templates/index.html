@@ -6,13 +6,14 @@
     <title>Todo App</title>
     <style>
         body {
-            background: black;
-            color: red;
+            
+            color: blue;
             margin-top: 5px;
         }
 
         .button {
-            color: green;
+            color: black;
+			background-color: #fff;
         }
 
         .mark {
@@ -35,14 +36,14 @@
             {% for todo in incomplete %}
             <li style="font-size: 30pt" class='mark'>{{ todo.text }} 
 				<form action="{{ url_for('complete', id=todo._id) }}" method="GET" style="display: inline;">
-        <button type="submit">Mark As Complete</button>
-    </form></li>
+					<input type="submit" value="Mark as complete" class="button"></form>
+    </li>
             {% endfor %}
         </ul>
         <h2>Completed Items</h2>
         <ul>
 			<form action="{{ url_for('remove') }}" method="POST" style="display: inline;">
-				<button type="submit">Remove All</button>
+				<input type="submit" value="Remove All" class="button"></form>
             {% for todo in complete %}
             <li style="font-size: 30pt">{{ todo.text }}
 				</li>
