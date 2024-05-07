@@ -1,35 +1,54 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-	<meta charset="UTF-8"> 
-	<title>Todo App</title> 
-	<style>
-    body{ 
-        background:black; 
-        color:red; 
-        margin-top: 5px; 
-    } 
-    .button{ 
-        color:green; 
-    } 
-    .mark{font-size: 10px;} 
-</style>
-     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body {
+            background: black;
+            color: red;
+            margin-top: 5px;
+        }
 
-</head> 
-<body> 
-	<h1>Todo List</h1> 
-	<div>Add a new todo item: 
-		<form > 
-			<input type="text" name="todoitem"> 
-			<input type="submit" value="Add Item" class="button"> 
-		</form> 
-	</div> 
-	<div> 
-		<h2>Incomplete Items</h2> 
-		 
-		<h2>Completed Items</h2> 
-		
-	</div> 
-</body> 
-</html> 
+        .button {
+            color: green;
+        }
+
+        .mark {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <div>
+        <h2>Add a new todo item:</h2>
+        <form action="{{ url_for('add') }}" method="POST">
+            <input type="text" name="todoitem" placeholder="Enter todo item">
+            <input type="submit" value="Add Item" class="button">
+        </form>
+    </div>
+    <div>
+		<h2>Incomplete Items</h2>
+        <ul>
+            {% for todo in incomplete %}
+            <li style="font-size: 30pt" class='mark'>{{ todo.text }} 
+				<form action="{{ url_for('complete', id=todo._id) }}" method="GET" style="display: inline;">
+        <button type="submit">Mark As Complete</button>
+    </form></li>
+            {% endfor %}
+        </ul>
+        <h2>Completed Items</h2>
+        <ul>
+			<form action="{{ url_for('remove') }}" method="POST" style="display: inline;">
+				<button type="submit">Remove All</button>
+            {% for todo in complete %}
+            <li style="font-size: 30pt">{{ todo.text }}
+				</li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+</body>
+</html>
